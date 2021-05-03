@@ -1,6 +1,6 @@
 [package]
 name = "meowhash"
-version = "0.1.2"
+version = "0.3.0"
 authors = ["Bodil Stokke <bodil@bodil.org>"]
 license = "MPL-2.0+"
 description = "Meow hash function"
@@ -9,9 +9,22 @@ documentation = "https://docs.rs/meowhash"
 readme = "README.md"
 categories = ["algorithms", "no-std"]
 keywords = ["meow", "hash", "digest"]
+edition = "2018"
 
 [dependencies]
-digest = "0.8.0"
+digest = "0.9"
+libc = { version = "0.2.67", optional = true }
 
 [dev-dependencies]
-proptest = "0.9.1"
+proptest = "0.10"
+bencher = "0.1.5"
+
+[build-dependencies]
+cc = { version = "1.0.50", optional = true }
+
+[features]
+ffi = ["libc", "cc"]
+
+[[bench]]
+name = "meow"
+harness = false
